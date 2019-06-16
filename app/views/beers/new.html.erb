@@ -1,0 +1,39 @@
+<h1>Create New Beer</h1>
+<%= render partial: 'layouts/errors', locals: {object: @beer}  %>
+<%= form_for @beer do |f| %>
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br><br>
+</div>
+<div>
+  <%= f.label :style %>
+  <%= f.text_field :style %><br><br>
+</div>
+<div>
+  <%= f.label :abv %>
+  <%= f.text_field :abv %>%<br><br>
+</div>
+<div>
+  <%= f.label :flavor_profile %>
+  <%= f.text_area :flavor_profile %><br><br>
+</div>
+
+<p> Select a Brewery: </p>
+<div>
+  <%= f.collection_select :brewery_id, Brewery.all, :id, :name, include_blank: 'Select One'%>
+
+</div>
+
+<p> Or create a new Brewery: </p>
+<div>
+  <%=f.fields_for :brewery do |ba| %>
+    <%= ba.label :name %>
+    <%= ba.text_field :name %>
+
+    <%= ba.label :location  %>
+    <%= ba.text_field :location %>
+  <% end %>
+</div>
+<br>
+<%= f.submit %>
+<% end %>
