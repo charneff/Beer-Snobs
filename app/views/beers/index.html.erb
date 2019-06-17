@@ -4,6 +4,7 @@
 <% @beers.each do |beer| %>
   <h2><%= beer.name %> - <%= beer.abv %>%, by <%= beer.brewery.name %></h2>
     <%= link_to "Write a review", new_beer_review_path(beer.id) %>
+    <%= link_to "See all Reviews", beer_reviews_path(beer.id) %>
   <div>
     <p><%= beer.flavor_profile %></p>
   </div>

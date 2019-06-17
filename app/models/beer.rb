@@ -23,6 +23,22 @@ class Beer < ApplicationRecord
 # #need to tell beer it belongs to brewery... thought it should be taken care of in new beer action and models?
 #   end
 
+  # def brewery_name=(name)
+  #   self.brewery = Brewery.find_or_create_by(name: name)
+  # end
+  #
+  # def brewery_name
+  #    self.brewery ? self.brewery.name : nil
+  # end
+
+  # def brewery_location=(location)
+  #   self.brewery = Brewery.find_or_create_by(location: location)
+  # end
+  #
+  # def brewery_location
+  #    self.brewery ? self.brewery.location : nil
+  # end
+
   def not_a_duplicate
     if Beer.find_by(name: name, brewery_id: brewery_id)
       errors.add(:name, 'has already been added for that brewery')

@@ -1,9 +1,13 @@
 <h1> All Reviews </h1>
 <ul>
 <% @reviews.each do |review| %>
-  <li><h3><%= review.title %> - <%= review.stars %></li></h3>
+  <li><h2><%= review.stars %> - <%= review.title %></h2>
+  <h3><%= review.beer.name %> - <%= review.beer.brewery.name %> by <%= review.user.username %></h3>
   <div>
-    <p><%= review.content %></p>
+    <h4><p><%= review.content %></p></h4></li>
   </div>
+  <% if review.user_id == current_user[:id] %>
+    <%= link_to "Update your review", edit_review_path(review.id) %>
+  <% end %>
 <% end %>
 </ul>

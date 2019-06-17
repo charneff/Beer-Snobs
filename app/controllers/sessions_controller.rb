@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
     elsif params[:provider] == 'github'
       @user = User.create_by_github_omniauth(auth)
       session[:user_id] = @user.id
-      binding.pry
       redirect_to user_path(@user)
     else
       @user = User.find_by(username: params[:user][:username])

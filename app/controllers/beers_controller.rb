@@ -21,7 +21,7 @@ class BeersController < ApplicationController
   end
 
   def index
-    @beers = Beer.all
+    @beers = Beer.order_by_rating.includes(:brewery)
   end
 
   private
