@@ -24,6 +24,11 @@ class BeersController < ApplicationController
     @beers = Beer.order_by_rating.includes(:brewery)
   end
 
+  def destroy
+    Beer.find(params[:id]).destroy
+    redirect_to beers_path
+  end
+
   private
 
   def beer_params

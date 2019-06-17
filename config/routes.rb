@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   resources :beers do
     resources :reviews, only: [:new, :index]
   end
-  resources :breweries, only: [:index]
+  resources :breweries, only: [:index, :show]
   resources :users, only: [:new, :create, :show]
   patch 'reviews/:id', to: 'reviews#update'
+  delete '/beers/:id', to: 'beer#destroy', as:'delete_beer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

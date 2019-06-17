@@ -20,7 +20,13 @@
 
 <p> Select a Brewery: </p>
 <div>
-  <%= f.collection_select :brewery_id, Brewery.all, :id, :name, include_blank: 'Select One'%>
+  <%= f.text_field :brewery_name, list: "breweries_autocomplete" %>
+  <datalist id="breweries_autocomplete">
+    <% Brewery.all.each do |brewery| %>
+      <option value="<%= brewery.name %>">
+    <% end %>
+  </datalist>
+  <textarea name="brewery[name]"></textarea>
 
 </div>
 

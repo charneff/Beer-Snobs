@@ -4,3 +4,7 @@
 <div>
   <p><%= @beer.flavor_profile %></p>
 </div>
+
+<%= form_tag beer_path(@beer.id), method: "delete" do %>
+  <%= submit_tag "Delete #{@beer.name}" %>
+<% end %>
