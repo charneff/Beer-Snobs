@@ -7,7 +7,6 @@ class BeersController < ApplicationController
 
   def create
     @beer = Beer.new(beer_params)
-    binding.pry
     @beer.user_id = session[:user_id]
 
     if @beer.save!
