@@ -29,6 +29,18 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @review.update(review_params)
+    if @review.save
+      redirect_to attraction_path(@review)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def review_params
