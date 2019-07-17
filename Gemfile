@@ -31,6 +31,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-github'
 gem 'dotenv-rails'
+gem 'jquery-rails'
+gem 'active_model_serializers', '~> 0.10.9'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
