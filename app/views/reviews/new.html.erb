@@ -3,3 +3,30 @@
 <%= render partial: 'layouts/errors', locals: {object: @review}  %>
 
 <%= render partial: 'form', locals: {object: @review}  %>
+<button id="click-me-for-new">click-me-for-new</button>
+
+<!-- <div id="reviewResult">
+  <h2 id ="reviewStars"></h2>
+  <h2 id="reviewTitle"></h2>
+  <p id="reviewContent"></p>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      //prevent form from submitting the default way
+      event.preventDefault();
+
+      var values = $(this).serialize();
+
+      var posting = $.post('/reviews', values);
+
+      posting.done(function(data) {
+        var review = data;
+        $("#reviewStars").text(review["stars"]);
+        $("#reviewTitle").text(review["title"]);
+        $("#reviewContent").text(review["content"]);
+      });
+    });
+  });
+</script> -->

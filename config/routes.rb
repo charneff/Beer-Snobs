@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#create'
   resources :reviews
   resources :beers do
-    resources :reviews, only: [:new, :index]
+    resources :reviews, only: [:new, :index, :show]
   end
   resources :breweries, only: [:index, :show]
   resources :users, only: [:new, :create, :show]

@@ -22,10 +22,19 @@ class BeersController < ApplicationController
 
   def show
     @beer = Beer.find_by_id(params[:id])
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @beer}
+    end
   end
 
   def index
     @beers = Beer.order_by_rating.includes(:brewery)
+    # @beers = Beer.all
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @beers}
+    end
   end
 
   def destroy

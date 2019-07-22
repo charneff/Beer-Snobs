@@ -1,10 +1,18 @@
-<h1><%= @beer.name %>  </h1>
+<ul id= "review_inserts">
+  <div id= "title-placement">
+    <h1><%= @beer.name %>  </h1>
 
-<h2>by <%= @beer.brewery.name %> </h2>
-<div>
-  <p><%= @beer.flavor_profile %></p>
-</div>
+    <h2>by <%= @beer.brewery.name %> </h2>
+    <div>
+      <p><%= @beer.flavor_profile %></p>
+      <%= link_to "See Reviews", beer_reviews_path(@beer.id) %>
+    </div>
 
-<%= form_tag beer_path(@beer.id), method: "delete" do %>
-  <%= submit_tag "Delete #{@beer.name}" %>
-<% end %>
+    <%= form_tag beer_path(@beer.id), method: "delete" do %>
+      <%= submit_tag "Delete #{@beer.name}" %>
+    <% end %>
+
+    <button id="show-beer">show beer/showing-beer</button>
+    <div id="showing-beer"></div>
+  </div>
+</ul>

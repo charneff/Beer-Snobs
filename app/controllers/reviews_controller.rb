@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
     if @review.save
       respond_to do |f|
         f.html {redirect_to review_path(@review)}
-        f.json {render json: @review}
+        f.json {render json: @review, status: 201}
       end
     else
       render :new
@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
     @review = Review.find_by_id(params[:id])
     respond_to do |f|
       f.html {render :show}
-      f.json {render json: @review}
+      f.json {render json: @review, status: 200}
     end
   end
 
@@ -55,6 +55,11 @@ class ReviewsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def review_data
+    review = Review.find(params[:id])
+    render json: review.to_json
   end
 
   private
