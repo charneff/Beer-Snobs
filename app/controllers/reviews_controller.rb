@@ -31,6 +31,10 @@ class ReviewsController < ApplicationController
   def index
     if @beer = Beer.find_by_id(params[:beer_id])
       @reviews = @beer.reviews
+      respond_to do |f|
+        f.html {render :index}
+        f.json {render json: @reviews}
+      end
     else
       @reviews = Review.all
       respond_to do |f|

@@ -11,7 +11,7 @@ class BeersController < ApplicationController
 
     @beer = Beer.create(beer_params)
     @beer.user_id = session[:user_id]
-    binding.pry
+
     if @beer.save!
       redirect_to beer_path(@beer)
     else
@@ -30,11 +30,11 @@ class BeersController < ApplicationController
 
   def index
     @beers = Beer.order_by_rating.includes(:brewery)
-    # @beers = Beer.all
-    respond_to do |f|
-      f.html {render :index}
-      f.json {render json: @beers}
-    end
+    render json: @beers
+    # respond_to do |f|
+    #   f.html {render :index}
+    #   f.json {render json: @beers}
+    # end
   end
 
   def destroy

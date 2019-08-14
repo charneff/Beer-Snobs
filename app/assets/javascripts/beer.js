@@ -1,24 +1,3 @@
-$(function(){
-  console.log("loaded")
-  listenForBeerClick()
-  clickBeer()
-})
-
-function listenForBeerClick(){
-  $("button#click-beer").on('click', function (event) {
-    event.preventDefault()
-    getBeers()
-  })
-}
-
-function clickBeer(){
-  $("button#show-beer").on('click', function (e) {
-    e.preventDefault()
-    console.log("clicked")
-    showBeer(id)
-  })
-}
-
 class Beer {
   constructor (obj){
     this.id = obj.id
@@ -29,42 +8,74 @@ class Beer {
     this.brewery = obj.brewery
     this.reviews = obj.reviews
   }
-}
 
-Beer.prototype.addHTML= function(){
-  return(
-    `<li> <strong> <a href= beers/${this.id} data-id= ${this.id} class= "show_link"> ${this.name} </a> </strong> </li>`
-  )
-}
 
-Beer.prototype.beersHTML = function() {
+beersHTML() {
   return(`
   <div>
-  <a href="/beers/${this.id}">
-    <h2>${this.name} - ${this.abv}% </h2></a>
-    <h3>${this.style} by ${this.brewery.name} in ${this.brewery.location}</h3>
-    <h4>${this.flavor_profile}</h4>
-
+  <a href id="see-beer" data-id=${this.id}>
+    <h2>${this.name}</a></h2>
+    <h3>${this.style} - ${this.abv}% </h3>
+  <a href id="see-beer-reviews">
+  <h5>See ${this.reviews.length} Review(s) </a><br>
+    <a href>Write a Review</a></h5>
   </div>
   `)
   }
 
-function getBeers(){
-  $.ajax({
-    url: 'http://localhost:3000/beers',
-    method: 'get',
-    dataType: 'json',
-  }).done(function(data) {
-    data.forEach(beer => {
-      let allBeers = new Beer(beer)
-      let allBeersHTML = allBeers.beersHTML()
-      document.getElementById("our-new-beers").innerHTML += allBeersHTML
-    })
-  })
+showBeerHTML() {
+  return(`
+    <div>
+    <h1>${this.name}</a> </h1>
+    <h2>by ${this.brewery.name} in ${this.brewery.location}</h2>
+    <h3>${this.style} - ${this.abv}%</h3>
+    <h4>${this.flavor_profile}</h4>
+    <a href id="see-beer-reviews" data-id=${this.id}>
+    <h5>See ${this.reviews.length} Review(s) </a><br>
+    </div>
+    `)
+  }
 }
 
-function showBeer(id){
-  fetch(`/${id}`)
-  .then(res => res.json())
-  .then(console.log(res))
+function getBeers(){
+  fetch('http://localhost:3000/beers')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    clearPage()
+    data.forEach(beer => {
+      let newBeer = new Beer(beer)
+      let beerHTML = newBeer.beersHTML()
+      $("#our-new-beers").append(beerHTML)
+    })
+    addClickBeer()
+  })
+    $("#our-new-beers").append("done")
+}
+
+function clearPage() {
+  $("#our-new-beers").empty()
+}
+
+function addClickBeer() {
+  var links = document.querySelectorAll('#see-beer')
+  for (var i = 0; i < links.length ; i++)
+    {
+      let id = links[i].dataset.id
+      links[i].addEventListener("click", function(event) {
+        event.preventDefault()
+        showBeer(id)
+      })
+    }
+  }
+
+
+function showBeer(id) {
+  clearPage()
+  $.get("/beers/" + id + ".json", function(data) {
+  let beer = new Beer(data)
+  let beerHTML = beer.showBeerHTML()
+  $("#our-new-beers").append(beerHTML)
+  })
 }

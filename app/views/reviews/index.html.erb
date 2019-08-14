@@ -1,17 +1,17 @@
 <h1> All Reviews </h1>
-<div id="review_html_format"
-<ul>
-<% @reviews.each do |review| %>
-  <li><h2><%= review.stars %> - <%= review.title %></h2>
-  <h3><%= review.beer.name %> - <%= review.beer.brewery.name %> by <%= review.user.username %></h3>
-  <div>
-    <h4><p><%= review.content %></p></h4></li>
-  </div>
-  <% if review.user_id == current_user[:id] %>
-    <%= link_to "Update your review", edit_review_path(review.id) %>
+
+  <ul>
+  <% @reviews.each do |review| %>
+    <li><h2><%= review.stars %> - <%= review.title %></h2>
+    <h3><%= review.beer.name %> - <%= review.beer.brewery.name %> by <%= review.user.username %></h3>
+    <div>
+      <h4><p><%= review.content %></p></h4></li>
+
+    <% if review.user_id == current_user[:id] %>
+      <%= link_to "Update your review", edit_review_path(review.id) %>
+    <% end %>
   <% end %>
-<% end %>
-</ul>
-<button id="click-me">click-me/our-new-reviews</button>
+  </ul>
+
 <div id="our-new-reviews"></div>
 </div>
