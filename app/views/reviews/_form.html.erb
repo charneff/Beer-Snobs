@@ -1,28 +1,25 @@
-<div id ="page-element">
-  <ul>
-  <%= form_for(@review) do |f| %>
-    <% if params[:beer_id] %>
-      <%= f.hidden_field :beer_id %>
-    <% else %>
-      <div>
-        <%= f.label :beer_id, "Select a Beer" %>
-        <%= f.collection_select :beer_id, Beer.alpha, :id, :name_and_brewery, include_blank: true %>
-      </div>
-    <% end %>
-  <div>
-    <%= f.label :stars %>
-    <%= f.number_field :stars, min:1, max:5 %>
-  </div>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
 
-  <%= f.submit "Create Review" %>
+<%= form_for(@review), :html => {:class => 'review-form'} do |f| %>
+  <% if params[:beer_id] %>
+    <%= f.hidden_field :beer_id %>
+  <% else %>
+    <div>
+      <%= f.label :beer_id, "Select a Beer" %>
+      <%= f.collection_select :beer_id, Beer.alpha, :id, :name_and_brewery, include_blank: true %>
+    </div>
   <% end %>
-  </ul>
+<div>
+  <%= f.label :stars %>
+  <%= f.number_field :stars, min:1, max:5 %>
 </div>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+</div>
+
+<%= f.submit "Create Review" %>
+<% end %>
