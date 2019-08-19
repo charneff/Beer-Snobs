@@ -87,8 +87,47 @@ function displayBeerReviews(id) {
   })
 }
 
-function createReview(){
-  console.log('inside create review')
+function createReviewForm(id){
+  let html = `
+  <form onsubmit="createReview(); return false;">
+    <div>
+      <label for="beer_id" type="hidden" id="beer_id" name="beer_id" value="id"></label>
+    </div>
+    <div>
+      <label for="stars">Stars</label>
+      <input min="1" max="5" type="number" name="stars" id="stars">
+    </div>
+    <div>
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title">
+    </div>
+    <div>
+      <label for="content">Content</label>
+      <textarea name="content" id="content"></textarea>
+    </div>
+
+    <input type="submit" id="submit" value="Create Review">
+    </form>
+  `
+  $("#our-new-beers").append(html)
+  document.getElementById('beer_id').value = id
+}
+function createReview() {
+  const review = {
+    beer_id: document.getElementById('beer_id').value,
+    stars: document.getElementById('stars').value,
+    title: document.getElementById('title').value,
+    content: document.getElementById('content').value
+  }
+  fetch('http://localhost:3000/reviews', {
+    method: 'POST',
+    body: JSON.stringify({ review }),
+    headers: {
+      'ContentType': 'application/json',
+      'Accept': 'application/json'
+    }
+  }).then(resp => resp.json())
+  .then(review => {console.log(review)})
 }
 
 
@@ -108,7 +147,7 @@ function addClickBeer() {
 
 function addClickReview() {
   var link = document.querySelectorAll('#see-beer-reviews')
-  for (var i = 0; i < link.length ; i++)
+  for (let i = 0; i < link.length ; i++)
     {
       let id = link[i].dataset.id
       link[i].addEventListener("click", function(event) {
@@ -120,12 +159,12 @@ function addClickReview() {
 
 function addClickNewReview() {
   var newReview = document.querySelectorAll('#new-review')
-  for (var i = 0; i < newReview.length ; i++)
+  for (let i = 0; i < newReview.length ; i++)
     {
       let id = newReview[i].dataset.id
       newReview[i].addEventListener("click", function(event) {
         event.preventDefault()
-        createReview()
+        createReviewForm(id)
       })
     }
 }

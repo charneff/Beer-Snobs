@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    binding.pry
     @review = current_user.reviews.build(review_params)
     if @review.save
       respond_to do |f|
