@@ -112,6 +112,7 @@ function createReviewForm(id){
   $("#our-new-beers").append(html)
   document.getElementById('beer_id').value = id
 }
+
 function createReview() {
   const review = {
     beer_id: document.getElementById('beer_id').value,
@@ -121,13 +122,16 @@ function createReview() {
   }
   fetch('http://localhost:3000/reviews', {
     method: 'POST',
-    body: JSON.stringify({ review }),
+    body: JSON.stringify( {review} ),
     headers: {
-      'ContentType': 'application/json',
+      'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
   }).then(resp => resp.json())
-  .then(review => {console.log(review)})
+  .then(review => {
+    document.querySelector('#reviews').innerHTML += `${review.stars} - ${review.title} : ${review.content}`
+  })
+  debugger;
 }
 
 

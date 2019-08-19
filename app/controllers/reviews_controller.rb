@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def new
     if @beer = Beer.find_by_id(params[:beer_id])
@@ -9,15 +10,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    binding.pry
     @review = current_user.reviews.build(review_params)
     if @review.save
-      respond_to do |f|
-        f.html {redirect_to review_path(@review)}
-        f.json {render json: @review, status: 201}
-      end
+
+      render json: @review, status: 201
     else
-      render :new
+
     end
   end
 
