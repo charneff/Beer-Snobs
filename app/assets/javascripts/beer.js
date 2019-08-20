@@ -46,6 +46,8 @@ function reviewsHTML(review) {
 function clearPage() {
   $("#our-new-beers").empty()
   $("#reviews").empty()
+  $("#review-form").empty()
+  $("#links").empty()
 }
 
 function getBeers(){
@@ -109,7 +111,7 @@ function createReviewForm(id){
     <input type="submit" id="submit" value="Create Review">
     </form>
   `
-  $("#our-new-beers").append(html)
+  $("#review-form").append(html)
   document.getElementById('beer_id').value = id
 }
 
@@ -129,9 +131,12 @@ function createReview() {
     }
   }).then(resp => resp.json())
   .then(review => {
-    document.querySelector('#reviews').innerHTML += `${review.stars} - ${review.title} : ${review.content}`
+    document.querySelector('#reviews').innerHTML += `<h4><li>${review.stars} - ${review.title}</h4>
+    <h5>${review.content}</h5>
+    </li>`
+    let reviewForm = document.getElementById('review-form')
+    reviewForm.innerHTML=""
   })
-  debugger;
 }
 
 

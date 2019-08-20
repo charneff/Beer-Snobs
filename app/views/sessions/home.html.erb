@@ -1,3 +1,11 @@
-<div id="our-new-beers">Welcome to Beer Snobs! </div>
+<div id="our-new-beers"><h1>Welcome to Beer Snobs! </h1>
+<h2>What would you like to do?</h2></div>
+<div id="review-form"></div>
 
 <div id="reviews"></div>
+
+<div id="links">
+  <%= link_to "Add a New Beer", new_beer_path %><br>
+  <a href="#" onclick="getBeers(); return false;">See All Beers</a><br>
+  <%= link_to "See All Breweries", breweries_path %>
+</div>
