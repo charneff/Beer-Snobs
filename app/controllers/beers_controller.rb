@@ -1,5 +1,5 @@
 class BeersController < ApplicationController
-  
+
 
   def new
     @beer = Beer.new
@@ -9,7 +9,6 @@ class BeersController < ApplicationController
   def create
     # @beer = Beer.create(beer_params)
     @brewery = Brewery.find_or_create_by(name: params[:beer][:brewery_name])
-
     @beer = Beer.create(beer_params)
     @beer.user_id = session[:user_id]
 
