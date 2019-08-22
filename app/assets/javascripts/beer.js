@@ -43,6 +43,15 @@ function reviewsHTML(review) {
     `)
 }
 
+function breweriesHTML(brewery) {
+  return(`
+    <ul>
+    <h2>${brewery.name} in ${brewery.location}</h2>
+    <h5>See ${brewery.beers.length} Beer(s)</h5>
+    </ul>
+    `)
+}
+
 function clearPage() {
   $("#our-new-beers").empty()
   $("#reviews").empty()
@@ -57,7 +66,7 @@ function getBeers(){
   })
   .then(function(data) {
     clearPage()
-    $("#our-new-beers").append("<h1>All Beers</h1>")
+    $("#our-new-beers").append("<h1>All Beers</h1><h2>(ordered by rating: high to low)</h2>")
     data.forEach(beer => {
       let newBeer = new Beer(beer)
       let beerHTML = newBeer.beersHTML()
@@ -65,7 +74,20 @@ function getBeers(){
     })
     addClickBeer()
   })
-    $("#our-new-beers").append("done")
+}
+
+function getBreweries(){
+  fetch('http://localhost:3000/breweries')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    clearPage()
+    data.forEach(brewery => {
+      let breweryHTML = breweriesHTML(brewery)
+      $("#our-new-beers").append(breweryHTML)
+    })
+  })
 }
 
 function showBeer(id) {

@@ -48,11 +48,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def review_data
-    review = Review.find(params[:id])
-    render json: review.to_json
-  end
-
   private
 
   def review_params
