@@ -57,6 +57,7 @@ function getBeers(){
   })
   .then(function(data) {
     clearPage()
+    $("#our-new-beers").append("<h1>All Beers</h1>")
     data.forEach(beer => {
       let newBeer = new Beer(beer)
       let beerHTML = newBeer.beersHTML()
