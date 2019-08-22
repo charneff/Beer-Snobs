@@ -161,6 +161,7 @@ function createReview() {
     let reviewForm = document.getElementById('review-form')
     reviewForm.innerHTML=""
   })
+  getBeers()
 }
 
 
