@@ -12,6 +12,8 @@ Brewery.create(name: 'Peticolas', location: 'Dallas, TX')
 Brewery.create(name: 'Community', location: 'Dallas, TX')
 Brewery.create(name: 'Deep Ellum', location: 'Dallas, TX')
 Brewery.create(name: 'Revolver', location: 'Grandbury, TX')
+Brewery.create(name: 'Tank 7', location: 'Kansas City, MO')
+
 
 Beer.create(name: 'Here Gose Nothin', style: 'Leipzig Gose', abv: 5, flavor_profile: 'Our Leipzig-Style Gose undergoes a spontaneous fermentation, similar to Belgian-style Gueuze/Lambic beers, and exhibits a complexity of acidic flavor and aroma contributed by wild yeast lactic fermentation. Lemon, lime and other citrus-like qualities are present in aroma and on the palate, which is balanced by the spicy character of added coriander and a mineral-mouthfeel from added sea salt. ', brewery_id: 1, user_id: 1)
 Beer.create(name: 'Paleta de Mango', style: 'German Kölsch', abv: 5.5, flavor_profile: "Palate pleasing-juicy and tropical-flavors of ripe mango, fresh lime and Mexican Pequin chiles.", brewery_id: 2, user_id: 1)
@@ -31,7 +33,7 @@ Beer.create(name: 'Dream Crusher', style: 'American Imperial IPA', abv: 9.5, fla
 It’s no secret, at DEBC, we’re fond of hops. Citrusy, piney, floral and fruity hops are at least a third of the reason we got ourselves into this whole adventure. Hops may be the current ruler of the craft beer scene, and we, for one, welcome our resinous, spicy, bitter overlords. We’ve taken the IPA category to its Event Horizon, and pulled back just enough to see the edge. Get the big picture, it’s hoppy!
 ", brewery_id: 13, user_id: 1)
 Beer.create(name: 'Blood and Honey', style: 'American Pale Wheat Ale', abv: 7, flavor_profile: "Ale brewed with blood orange peels, honey and spices.", brewery_id: 14, user_id: 1)
-# Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)
+Beer.create(name: 'Tank 7', style: 'Belgian Saison', abv: 8.5, flavor_profile: "ost breweries have at least one piece of equipment that’s just a bit persnickity. Here at Boulevard we have fermenter number seven, the black sheep of our cellar family. Ironically, when our brewers were experimenting with variations on a traditional Belgian-style farmhouse ale, the perfect combination of elements came together in that very vessel. You could call it fate, but they called it Tank 7, and so it is. Beginning with a big surge of fruity aromatics and grapefruit-hoppy notes, the flavor of this complex, straw-colored ale tapers off to a peppery, dry finish.", brewery_id: 14, user_id: 1)
 # Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)
 # Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)
 # Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)

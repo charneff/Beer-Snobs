@@ -8,12 +8,13 @@ class BeersController < ApplicationController
 
   def create
     # @beer = Beer.create(beer_params)
+    binding.pry
     @brewery = Brewery.find_or_create_by(name: params[:beer][:brewery_name])
     @beer = Beer.create(beer_params)
     @beer.user_id = session[:user_id]
 
     if @beer.save!
-      redirect_to beer_path(@beer)
+      redirect_to home_path
     else
       @beer.build_brewery
       render :new
