@@ -12,7 +12,7 @@ Brewery.create(name: 'Peticolas', location: 'Dallas, TX')
 Brewery.create(name: 'Community', location: 'Dallas, TX')
 Brewery.create(name: 'Deep Ellum', location: 'Dallas, TX')
 Brewery.create(name: 'Revolver', location: 'Grandbury, TX')
-Brewery.create(name: 'Tank 7', location: 'Kansas City, MO')
+Brewery.create(name: 'Boulevard', location: 'Kansas City, MO')
 
 
 Beer.create(name: 'Here Gose Nothin', style: 'Leipzig Gose', abv: 5, flavor_profile: 'Our Leipzig-Style Gose undergoes a spontaneous fermentation, similar to Belgian-style Gueuze/Lambic beers, and exhibits a complexity of acidic flavor and aroma contributed by wild yeast lactic fermentation. Lemon, lime and other citrus-like qualities are present in aroma and on the palate, which is balanced by the spicy character of added coriander and a mineral-mouthfeel from added sea salt. ', brewery_id: 1, user_id: 1)

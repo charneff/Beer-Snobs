@@ -8,8 +8,7 @@ class BeersController < ApplicationController
 
   def create
     # @beer = Beer.create(beer_params)
-    binding.pry
-    @brewery = Brewery.find_or_create_by(name: params[:beer][:brewery_name])
+    @brewery = Brewery.find_by(name: params[:beer][:brewery_name])
     @beer = Beer.create(beer_params)
     @beer.user_id = session[:user_id]
 

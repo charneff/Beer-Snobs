@@ -28,16 +28,6 @@
   </datalist>
 </div>
 
-<p> Or create a new Brewery: </p>
-<div>
-  <%=f.fields_for :brewery do |ba| %>
-    <%= ba.label :name %>
-    <%= ba.text_field :name %>
-
-    <%= ba.label :location  %>
-    <%= ba.text_field :location %>
-  <% end %>
-</div>
 <br>
 <%= f.submit %>
 <% end %>
