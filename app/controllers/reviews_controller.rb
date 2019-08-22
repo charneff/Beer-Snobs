@@ -10,12 +10,16 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = current_user.reviews.build(review_params)
-    if @review.save
-      render json: @review, status: 201
+    if !logged_in?
+      redirect_to login_path
     else
-      flash[:error] = "Review not created."
-    end
+      @review = current_user.reviews.build(review_params)
+      if @review.save
+        render json: @review, status: 201
+      else
+        flash[:error] = "Review not created."
+      end
+    end 
   end
 
   def show
