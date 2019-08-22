@@ -7,9 +7,7 @@ class BeersController < ApplicationController
   end
 
   def create
-    if !logged_in?
-      redirect_to login_path
-    else
+    if !!logged_in?
       # @beer = Beer.create(beer_params)
       @brewery = Brewery.find_by(name: params[:beer][:brewery_name])
       @beer = Beer.create(beer_params)
@@ -21,24 +19,19 @@ class BeersController < ApplicationController
         @beer.build_brewery
         render :new
       end
+    else
+      redirect_to login_path
     end
   end
 
   def show
     @beer = Beer.find_by_id(params[:id])
-    respond_to do |f|
-      f.html {render :show}
-      f.json {render json: @beer}
-    end
+    render json: @beer
   end
 
   def index
     @beers = Beer.order_by_rating.includes(:brewery)
     render json: @beers
-    # respond_to do |f|
-    #   f.html {render :index}
-    #   f.json {render json: @beers}
-    # end
   end
 
   def destroy

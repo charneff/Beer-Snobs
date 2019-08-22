@@ -70,7 +70,7 @@ function getBeers(){
 
 function showBeer(id) {
   clearPage()
-  $.get("/beers/" + id + ".json", function(data) {
+  $.get("/beers/" + id, function(data) {
   let beer = new Beer(data)
   let beerHTML = beer.showBeerHTML()
   $("#our-new-beers").append(beerHTML)

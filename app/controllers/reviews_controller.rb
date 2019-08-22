@@ -10,39 +10,24 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    if !logged_in?
-      redirect_to login_path
+    @review = current_user.reviews.build(review_params)
+    if @review.save
+      render json: @review, status: 201
     else
-      @review = current_user.reviews.build(review_params)
-      if @review.save
-        render json: @review, status: 201
-      else
-        flash[:error] = "Review not created."
-      end
-    end 
+      flash[:error] = "Review not created."
+    end
   end
 
   def show
     @review = Review.find_by_id(params[:id])
-    respond_to do |f|
-      f.html {render :show}
-      f.json {render json: @review, status: 200}
-    end
   end
 
   def index
     if @beer = Beer.find_by_id(params[:beer_id])
       @reviews = @beer.reviews
-      respond_to do |f|
-        f.html {render :index}
-        f.json {render json: @reviews}
-      end
+      render json: @reviews
     else
       @reviews = Review.all
-      respond_to do |f|
-        f.html {render :index}
-        f.json {render json: @reviews}
-      end
     end
   end
 
