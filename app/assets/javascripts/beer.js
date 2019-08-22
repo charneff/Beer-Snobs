@@ -47,7 +47,7 @@ function breweriesHTML(brewery) {
   return(`
     <ul>
     <h2>${brewery.name} in ${brewery.location}</h2>
-    <h5>See ${brewery.beers.length} Beer(s)</h5>
+    <h5>${brewery.beers.length} Beer(s) added.</h5>
     </ul>
     `)
 }
@@ -83,6 +83,7 @@ function getBreweries(){
   })
   .then(function(data) {
     clearPage()
+    $("#our-new-beers").append("<h1>All Breweries</h1>")
     data.forEach(brewery => {
       let breweryHTML = breweriesHTML(brewery)
       $("#our-new-beers").append(breweryHTML)
