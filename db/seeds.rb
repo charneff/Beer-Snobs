@@ -1,7 +1,38 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Brewery.create(name: 'Destihl', location: 'Bloomington, IL')
+Brewery.create(name: 'Rahr & Sons', location: 'Fort Worth, TX')
+Brewery.create(name: 'Jester King', location: 'Austin, TX')
+Brewery.create(name: 'Live Oak', location: 'Austin, TX')
+Brewery.create(name: 'Karbach', location: 'Houston, TX')
+Brewery.create(name: 'Stone', location: 'San Diego, CA')
+Brewery.create(name: 'Dogfish Head', location: 'Milton, DE')
+Brewery.create(name: 'Tallgrass', location: 'Manhattan, KS')
+Brewery.create(name: 'Founders', location: 'Grand Rapids, MI')
+Brewery.create(name: 'Surly', location: 'Minneapolis, MN')
+Brewery.create(name: 'Peticolas', location: 'Dallas, TX')
+Brewery.create(name: 'Community', location: 'Dallas, TX')
+Brewery.create(name: 'Deep Ellum', location: 'Dallas, TX')
+Brewery.create(name: 'Revolver', location: 'Grandbury, TX')
+
+Beer.create(name: 'Here Gose Nothin', style: 'Leipzig Gose', abv: 5, flavor_profile: 'Our Leipzig-Style Gose undergoes a spontaneous fermentation, similar to Belgian-style Gueuze/Lambic beers, and exhibits a complexity of acidic flavor and aroma contributed by wild yeast lactic fermentation. Lemon, lime and other citrus-like qualities are present in aroma and on the palate, which is balanced by the spicy character of added coriander and a mineral-mouthfeel from added sea salt. ', brewery_id: 1, user_id: 1)
+Beer.create(name: 'Paleta de Mango', style: 'German Kölsch', abv: 5.5, flavor_profile: "Palate pleasing-juicy and tropical-flavors of ripe mango, fresh lime and Mexican Pequin chiles.", brewery_id: 2, user_id: 1)
+Beer.create(name: 'Das Wunderkind!', style: 'Belgian Saison', abv: 4.5, flavor_profile: "Mature beer, refermented in oak barrels with wild yeast and souring bacteria is blended with fresh, dry-hopped beer prior to bottle-conditioning. Dry and lightly tart, with notes of citrus, barnyard, and tropical fruit.", brewery_id: 3, user_id: 1)
+Beer.create(name: 'HefeWeizen', style: 'German Hefeweizen', abv: 5.3, flavor_profile: "Modeled after the classic wheat beers of Bavaria, Hefeweizen is cloudy and straw-colored with a meringue-like head that lingers to the bottom of the glass. Brewed with an ample volume of wheat malt and few hops, this beer features a unique yeast strain that produces harmonious notes of clove, banana, and vanilla throughout this effervescent brew. A traditional interpretation of a classic style, this idiosyncratic Bavarian beer is perfectly at home here in Texas.
+", brewery_id: 4, user_id: 1)
+Beer.create(name: 'Hopadillo IPA', style: 'American IPA', abv: 6.6, flavor_profile: "A 'Texas-style IPA' at ~70 IBU and brewed with a combination of American, English and German hops (German Magnum, Chinook, Amarillo, Citra, Simcoe, East Kent Goldings). Dry-hopped too.", brewery_id: 5, user_id: 1)
+Beer.create(name: 'Xocoveza', style: "English Sweet / Milk Stout", abv: 8.1, flavor_profile: "Xocoveza Mocha Stout is the result of the homebrewing spirit and a cross-border collaboration. In 2014, Stone Brewing invited us to join them on this Mexican-Hot-Chocolate inspired creation. Based on Chris Bankers winning recipe, we created this rich and decadent Imperial Milk Stout with traditional Mexican ingredients. In your hands you have Insurgente's version of this for the first time on this side of the border.", brewery_id: 6, user_id: 1)
+Beer.create(name: '120 Minute IPA', style: 'American Imperial IPA', abv: 18, flavor_profile: "Too extreme to be called beer? 120 Minute IPA is brewed to a colossal 45-degree plato, boiled for a full two hours while being continuously hopped with high-alpha American hops, then dry-hopped daily in the fermenter for a month and aged for another month on whole-leaf hops!", brewery_id: 7, user_id: 1)
+Beer.create(name: 'Raspberry Jam', style: 'Berliner Weisse', abv: 4.3, flavor_profile: "Light and refreshing, with its crisp natural tartness balanced by the addition of raspberries, this Berliner Weisse was initially developed at our brewpub Tallgrass Tap House. When it became a huge hit, we decided it should “go on tour” as part of the Explorer Series. Pucker up and rock on.", brewery_id: 8, user_id: 1)
+Beer.create(name: 'Breakfast Stout', style: 'American Imperial Stout', abv: 8.3, flavor_profile: "The coffee lover’s consummate beer. Brewed with an abundance of flaked oats, bitter and imported chocolates, and two types of coffee, this stout has an intense fresh-roasted java nose topped with a frothy, cinnamon-colored head that goes forever.", brewery_id: 9, user_id: 1)
+Beer.create(name: 'Furious', style: 'American IPA', abv: 6.7, flavor_profile: "A tempest on the tongue, or a moment of pure hop bliss? Brewed with a dazzling blend of American hops and Scottish malt, this crimson-hued ale delivers waves of citrus, pine and caramel-toffee. For those who favor flavor, Furious has the hop-fire your taste buds have been screaming for.", brewery_id: 10, user_id: 1)
+Beer.create(name: "Sit Down Or I'll Sit You Down", style: 'American Imperial IPA', abv: 10, flavor_profile: "The intent is to exhibit the fresh and bright character of the hops. We dry hopped it with over a pound of hops per barrel of beer. It's gold in color and the floral ester aroma is high. The hop bitterness is high, but not at all harsh. The hop flavor is high, fresh, and lively. Yet with all of our beers, it's all about balance and this one is no exception. The malt character is fairly high and provides a tremendously full mouthfeel. Finally, the alcohol in this beer is intentionally present (and delicious).", brewery_id: 11, user_id: 1)
+Beer.create(name: 'Mosaic IPA', style: 'American IPA', abv: 8.6, flavor_profile: " The deep golden/light amber color of this IPA comes from the use of a blend of English Maris Otter and American pale base malts. Sparing use of English crystal malt lends some caramel sweetness to help balance the hefty bitterness. Heady aromas of blueberry, pine, citrus and tropical fruit are the result of blending Mosaic hops with several other delicious American hop varieties. For being a large, hoppy beer it is quite drinkable, in part due to the balancing act of alcohol, malt complexity, and enormous American hop character.
+", brewery_id: 12, user_id: 1)
+Beer.create(name: 'Dream Crusher', style: 'American Imperial IPA', abv: 9.5, flavor_profile: "A quantum leap beyond our IPA, with rye, of course.
+It’s no secret, at DEBC, we’re fond of hops. Citrusy, piney, floral and fruity hops are at least a third of the reason we got ourselves into this whole adventure. Hops may be the current ruler of the craft beer scene, and we, for one, welcome our resinous, spicy, bitter overlords. We’ve taken the IPA category to its Event Horizon, and pulled back just enough to see the edge. Get the big picture, it’s hoppy!
+", brewery_id: 13, user_id: 1)
+Beer.create(name: 'Blood and Honey', style: 'American Pale Wheat Ale', abv: 7, flavor_profile: "Ale brewed with blood orange peels, honey and spices.", brewery_id: 14, user_id: 1)
+# Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)
+# Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)
+# Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)
+# Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)
+# Beer.create(name: '', style: '', abv: , flavor_profile: "", brewery_id: , user_id: 1)

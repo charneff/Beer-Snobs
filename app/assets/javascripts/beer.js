@@ -143,8 +143,8 @@ function createReview() {
 // Event Listeners
 
 function addClickBeer() {
-  var links = document.querySelectorAll('#see-beer')
-  for (var i = 0; i < links.length ; i++)
+  let links = document.querySelectorAll('#see-beer')
+  for (let i = 0; i < links.length ; i++)
     {
       let id = links[i].dataset.id
       links[i].addEventListener("click", function(event) {
@@ -155,7 +155,7 @@ function addClickBeer() {
   }
 
 function addClickReview() {
-  var link = document.querySelectorAll('#see-beer-reviews')
+  let link = document.querySelectorAll('#see-beer-reviews')
   for (let i = 0; i < link.length ; i++)
     {
       let id = link[i].dataset.id
@@ -167,7 +167,7 @@ function addClickReview() {
   }
 
 function addClickNewReview() {
-  var newReview = document.querySelectorAll('#new-review')
+  let newReview = document.querySelectorAll('#new-review')
   for (let i = 0; i < newReview.length ; i++)
     {
       let id = newReview[i].dataset.id
