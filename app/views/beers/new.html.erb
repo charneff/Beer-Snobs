@@ -1,33 +1,39 @@
 <h1>Create New Beer</h1>
+
 <%= render partial: 'layouts/errors', locals: {object: @beer}  %>
-<%= form_for @beer do |f| %>
-<div>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br><br>
-</div>
-<div>
-  <%= f.label :style %>
-  <%= f.text_field :style %><br><br>
-</div>
-<div>
-  <%= f.label :abv %>
-  <%= f.text_field :abv %>%<br><br>
-</div>
-<div>
-  <%= f.label :flavor_profile %>
-  <%= f.text_area :flavor_profile %><br><br>
-</div>
 
-<p> Select a Brewery: </p>
-<div>
-  <%= f.text_field :brewery_name, list: "breweries_autocomplete" %>
-  <datalist id="breweries_autocomplete">
-    <% Brewery.all.each do |brewery| %>
-      <option value="<%= brewery.name %>">
-    <% end %>
-  </datalist>
-</div>
+  <%= form_for @beer do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %><br><br>
+    </div>
+    <div>
+      <%= f.label :style %>
+      <%= f.text_field :style %><br><br>
+    </div>
+    <div>
+      <%= f.label :abv %>
+      <%= f.text_field :abv %>%<br><br>
+    </div>
+    <div>
+      <%= f.label :flavor_profile %><br>
+      <%= f.text_area :flavor_profile %><br><br>
+    </div>
+    <p> Select a Brewery: </p>
+    <div>
+      <%= f.collection_select :brewery_id, Brewery.all, :id, :name_and_location, include_blank: 'Select One' %>
 
-<br>
-<%= f.submit %>
-<% end %>
+    </div>
+
+    <p> Or Create One: </p>
+    <div>
+      <%= f.fields_for :brewery do |b| %>
+        <%= b.label :name %>
+        <%= b.text_field :name %>
+        <%= b.label :location %>
+        <%= b.text_field :location %>
+      <% end %>
+    </div><br>
+
+  <%= f.submit %>
+  <% end %>

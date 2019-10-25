@@ -4,7 +4,10 @@ class Beer < ApplicationRecord
   has_many :reviews
   has_many :users, through: :reviews #user who reviewed
   validates :name, presence: true
-  accepts_nested_attributes_for :brewery
+  validates :style, presence: true
+  validates :abv, presence: true
+  validates :flavor_profile, presence: true
+  validates :brewery, presence: true
   validate :not_a_duplicate
 
   scope :order_by_rating, -> {left_joins(:reviews).group(:id).order('avg(stars) desc')}
@@ -13,14 +16,10 @@ class Beer < ApplicationRecord
     order(:name)
   end
 
-  def brewery_name=(name)
-    self.brewery = Brewery.find_or_create_by(name: name)
+  def brewery_attributes=(attributes)
+    self.brewery = Brewery.find_or_create_by(attributes) if !attributes['name'].empty?
+    self.brewery
   end
-
-  def brewery_name
-     self.brewery ? self.brewery.name : nil
-  end
-
 
   def not_a_duplicate
     if Beer.find_by(name: name, brewery_id: brewery_id)

@@ -10,9 +10,9 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = current_user.reviews.build(review_params)
-    if @review.save
-      render json: @review, status: 201
+    review = current_user.reviews.build(review_params)
+    if review.save
+      render json: review, status: 201
     else
       flash[:error] = "Review not created."
     end
@@ -46,6 +46,13 @@ class ReviewsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    review = Review.find(params[:id])
+    review.destroy
+    flash[:notice] = "Review successfully deleted."
+    redirect_to reviews_path
   end
 
   private

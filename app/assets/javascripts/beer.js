@@ -76,6 +76,33 @@ function getBeers(){
   })
 }
 
+function getBeersAlpha(){
+  fetch('http://localhost:3000/beers')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    clearPage()
+    $("#our-new-beers").append("<h1>All Beers</h1>")
+    alpha = data.sort(function(a, b) {
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    })
+
+    alpha.forEach(beer => {
+      let newBeer = new Beer(beer)
+      let beerHTML = newBeer.beersHTML()
+      $("#our-new-beers").append(beerHTML)
+    })
+  })
+}
+
 function getBreweries(){
   fetch('http://localhost:3000/breweries')
   .then(function(response) {
@@ -161,7 +188,6 @@ function createReview() {
     let reviewForm = document.getElementById('review-form')
     reviewForm.innerHTML=""
   })
-  getBeers()
 }
 
 

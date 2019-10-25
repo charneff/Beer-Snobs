@@ -6,14 +6,8 @@ class BreweriesController < ApplicationController
     render json: @breweries
   end
 
-  def create
-    Brewery.create(brewery_params)
-  end
-
-  private
-
-  def brewery_params
-    params.require(:brewery).permit(:brewery_name, beer_ids: [])
+  def show
+    @brewery = Brewery.find(params[:id])
   end
 
 end

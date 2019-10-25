@@ -1,11 +1,11 @@
 class Brewery < ApplicationRecord
   has_many :beers
+  validates :name, presence: true, uniqueness: true
 
-  # def beer_ids=(ids)
-  #   ids.each do |id|
-  #     beer = Beer.find(id)
-  #     self.beers << beer
-  #   end
-  # end
+  scope :alpha, -> {order(:name)}
+
+  def name_and_location
+    "#{name} - #{location}"
+  end
 
 end

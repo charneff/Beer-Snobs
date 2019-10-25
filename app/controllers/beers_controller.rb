@@ -1,5 +1,6 @@
 class BeersController < ApplicationController
-
+  before_action :set_beer, only:[:show, :edit, :update]
+  before_action :redirect_if_not_logged_in
 
   def new
     @beer = Beer.new
@@ -8,8 +9,6 @@ class BeersController < ApplicationController
 
   def create
     if !!logged_in?
-      # @beer = Beer.create(beer_params)
-      @brewery = Brewery.find_by(name: params[:beer][:brewery_name])
       @beer = Beer.create(beer_params)
       @beer.user_id = session[:user_id]
 
@@ -25,13 +24,13 @@ class BeersController < ApplicationController
   end
 
   def show
-    @beer = Beer.find_by_id(params[:id])
-    render json: @beer
+    beer = Beer.find_by_id(params[:id])
+    render json: beer
   end
 
   def index
-    @beers = Beer.order_by_rating.includes(:brewery)
-    render json: @beers
+    beers = Beer.order_by_rating.includes(:brewery)
+    render json: beers
   end
 
   def destroy
@@ -39,20 +38,14 @@ class BeersController < ApplicationController
     redirect_to beers_path
   end
 
-  def brewery_name=(name)
-    self.brewery = Brewery.find_or_create_by(name: name)
-  end
-
-  def brewery_name
-     self.brewery ? self.brewery.name : nil
-  end
-
   private
 
   def beer_params
-    params.require(:beer).permit(:name, :style, :abv, :flavor_profile, :brewery_name)
+     params.require(:beer).permit(:name, :style, :abv, :flavor_profile, :brewery_id, brewery_attributes:[:name, :location])
+  end
+
+  def set_beer
+    @beer = Beer.find_by(params[:id])
+    redirect to beers_path if !@beer
   end
 end
-
-
-# :brewery_id, brewery_attributes: [:name, :location]
