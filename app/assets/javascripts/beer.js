@@ -53,28 +53,29 @@ function breweriesHTML(brewery) {
 }
 
 function clearPage() {
-  $("#our-new-beers").empty()
-  $("#reviews").empty()
-  $("#review-form").empty()
-  $("#links").empty()
+  document.getElementById('greeting').innerHTML=""
+  document.getElementById('our-new-beers').innerHTML=""
+  document.getElementById('reviews').innerHTML=""
+  document.getElementById('review-form').innerHTML=""
+  document.getElementById('links').innerHTML=""
 }
-
-function getBeers(){
-  fetch('http://localhost:3000/beers')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    clearPage()
-    $("#our-new-beers").append("<h1>All Beers</h1><h2>(ordered by rating: high to low)</h2>")
-    data.forEach(beer => {
-      let newBeer = new Beer(beer)
-      let beerHTML = newBeer.beersHTML()
-      $("#our-new-beers").append(beerHTML)
-    })
-    addClickBeer()
-  })
-}
+//
+// function getBeers(){
+//   fetch('http://localhost:3000/beers')
+//   .then(function(response) {
+//     return response.json();
+//   })
+//   .then(function(data) {
+//     clearPage()
+//     $("#our-new-beers").append("<h1>All Beers</h1><h2>(ordered by rating: high to low)</h2>")
+//     data.forEach(beer => {
+//       let newBeer = new Beer(beer)
+//       let beerHTML = newBeer.beersHTML()
+//       $("#our-new-beers").append(beerHTML)
+//     })
+//     addClickBeer()
+//   })
+// }
 
 function getBeersAlpha(){
   fetch('http://localhost:3000/beers')
@@ -100,6 +101,7 @@ function getBeersAlpha(){
       let beerHTML = newBeer.beersHTML()
       $("#our-new-beers").append(beerHTML)
     })
+    addClickBeer()
   })
 }
 
