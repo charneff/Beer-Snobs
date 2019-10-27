@@ -1,3 +1,27 @@
+// function createReview() {
+//   const review = {
+//     beer_id: document.getElementById('beer_id').value,
+//     stars: document.getElementById('stars').value,
+//     title: document.getElementById('title').value,
+//     content: document.getElementById('content').value
+//   }
+//   fetch('http://localhost:3000/reviews', {
+//     method: 'POST',
+//     body: JSON.stringify( {review} ),
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json'
+//     }
+//   }).then(resp => resp.json())
+//   .then(review => {
+//     document.querySelector('#reviews').innerHTML += `<h4><li>${review.stars} - ${review.title}</h4>
+//     <h5>${review.content}</h5>
+//     </li>`
+//     let reviewForm = document.getElementById('review-form')
+//     reviewForm.innerHTML=""
+//   })
+// }
+
 // class Review {
 //   constructor (object){
 //     this.id = object.id

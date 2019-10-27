@@ -23,7 +23,7 @@ class Beer {
   showBeerHTML() {
     return(`
       <div>
-      <h1>${this.name}</a> </h1>
+      <h1>${this.name} </h1>
       <h2>by ${this.brewery.name} in ${this.brewery.location}</h2>
       <h3>${this.style} - ${this.abv}%</h3>
       <h4>${this.flavor_profile}</h4>
@@ -46,7 +46,8 @@ function reviewsHTML(review) {
 function breweriesHTML(brewery) {
   return(`
     <ul>
-    <h2>${brewery.name} in ${brewery.location}</h2>
+    <a href id="see-brewery" data-id=${brewery.id}>
+    <h2>${brewery.name}</a> in ${brewery.location}</h2>
     <h5>${brewery.beers.length} Beer(s) added.</h5>
     </ul>
     `)
@@ -59,23 +60,6 @@ function clearPage() {
   document.getElementById('review-form').innerHTML=""
   document.getElementById('links').innerHTML=""
 }
-//
-// function getBeers(){
-//   fetch('http://localhost:3000/beers')
-//   .then(function(response) {
-//     return response.json();
-//   })
-//   .then(function(data) {
-//     clearPage()
-//     $("#our-new-beers").append("<h1>All Beers</h1><h2>(ordered by rating: high to low)</h2>")
-//     data.forEach(beer => {
-//       let newBeer = new Beer(beer)
-//       let beerHTML = newBeer.beersHTML()
-//       $("#our-new-beers").append(beerHTML)
-//     })
-//     addClickBeer()
-//   })
-// }
 
 function getBeersAlpha(){
   fetch('http://localhost:3000/beers')
@@ -117,7 +101,13 @@ function getBreweries(){
       let breweryHTML = breweriesHTML(brewery)
       $("#our-new-beers").append(breweryHTML)
     })
+    addClickBrewery()
   })
+}
+
+function showBrewery(id) {
+  clearPage()
+  debugger;
 }
 
 function showBeer(id) {
@@ -132,7 +122,7 @@ function showBeer(id) {
 }
 
 function displayBeerReviews(id) {
-  $("#reviews").empty()
+  document.getElementById('reviews').innerHTML=""
   $.get("/beers/" + id + "/reviews.json", function(data) {
     data.forEach(review => {
       let reviewHTML = reviewsHTML(review)
@@ -203,6 +193,18 @@ function addClickBeer() {
       links[i].addEventListener("click", function(event) {
         event.preventDefault()
         showBeer(id)
+      })
+    }
+  }
+
+function addClickBrewery() {
+  let links = document.querySelectorAll('#see-brewery')
+  for (let i = 0; i < links.length ; i++)
+    {
+      let id = links[i].dataset.id
+      links[i].addEventListener("click", function(event) {
+        event.preventDefault()
+        showBrewery(id)
       })
     }
   }
