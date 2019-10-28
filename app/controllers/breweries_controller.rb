@@ -8,6 +8,7 @@ class BreweriesController < ApplicationController
 
   def show
     @brewery = Brewery.find(params[:id])
+    render json: @brewery
   end
 
 end

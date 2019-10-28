@@ -53,6 +53,7 @@ function breweriesHTML(brewery) {
     `)
 }
 
+
 function clearPage() {
   document.getElementById('greeting').innerHTML=""
   document.getElementById('our-new-beers').innerHTML=""
@@ -107,8 +108,12 @@ function getBreweries(){
 
 function showBrewery(id) {
   clearPage()
-  debugger;
-}
+  $.get("/breweries/" + id, function(data) {
+      let breweryHTML = breweriesHTML(data)
+      $("#our-new-beers").append(breweryHTML)
+    })
+  }
+
 
 function showBeer(id) {
   clearPage()
