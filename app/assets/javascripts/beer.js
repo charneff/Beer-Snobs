@@ -53,6 +53,15 @@ function breweriesHTML(brewery) {
     `)
 }
 
+function breweryBeersHTML(brewery) {
+  debugger
+  return(`
+    <h2><a href id="see-beer" data-id=${brewery.id}>
+    ${brewery.name}</a></h2>
+
+    `)
+}
+
 
 function clearPage() {
   document.getElementById('greeting').innerHTML=""
@@ -108,11 +117,15 @@ function getBreweries(){
 
 function showBrewery(id) {
   clearPage()
+  $("#our-new-beers").append("<h1>Beers</h1>")
   $.get("/breweries/" + id, function(data) {
-      let breweryHTML = breweriesHTML(data)
-      $("#our-new-beers").append(breweryHTML)
+    data.beers.forEach(beer => {
+      let breweryBeers = breweryBeersHTML(beer)
+      $("#our-new-beers").append(breweryBeers)
     })
-  }
+    addClickBeer()
+  })
+}
 
 
 function showBeer(id) {
