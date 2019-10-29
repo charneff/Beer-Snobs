@@ -54,7 +54,6 @@ function breweriesHTML(brewery) {
 }
 
 function breweryBeersHTML(brewery) {
-  debugger
   return(`
     <h2><a href id="see-beer" data-id=${brewery.id}>
     ${brewery.name}</a></h2>
@@ -117,8 +116,8 @@ function getBreweries(){
 
 function showBrewery(id) {
   clearPage()
-  $("#our-new-beers").append("<h1>Beers</h1>")
   $.get("/breweries/" + id, function(data) {
+    $("#our-new-beers").append(data.name)
     data.beers.forEach(beer => {
       let breweryBeers = breweryBeersHTML(beer)
       $("#our-new-beers").append(breweryBeers)
