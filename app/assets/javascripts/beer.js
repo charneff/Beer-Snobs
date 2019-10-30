@@ -37,7 +37,7 @@ class Beer {
 
 function reviewsHTML(review) {
   return(`
-    <h4><li>${review.stars} - ${review.title}</h4>
+    <h4><li>${review.stars} - ${review.title} by ${review.user.username}</h4>
     <h5>${review.beer.name} - ${review.content}</h5>
     </li>
     `)
@@ -123,7 +123,6 @@ function getReviews(){
     clearPage()
     $("#our-new-beers").append("<h1>All Reviews</h1>")
     data.forEach(review => {
-      debugger;
       let reviewHTML = reviewsHTML(review)
       $("#our-new-beers").append(reviewHTML)
     })
