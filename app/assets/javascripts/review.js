@@ -1,61 +1,109 @@
-// function createReview() {
-//   const review = {
-//     beer_id: document.getElementById('beer_id').value,
-//     stars: document.getElementById('stars').value,
-//     title: document.getElementById('title').value,
-//     content: document.getElementById('content').value
-//   }
-//   fetch('http://localhost:3000/reviews', {
-//     method: 'POST',
-//     body: JSON.stringify( {review} ),
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json'
-//     }
-//   }).then(resp => resp.json())
-//   .then(review => {
-//     document.querySelector('#reviews').innerHTML += `<h4><li>${review.stars} - ${review.title}</h4>
-//     <h5>${review.content}</h5>
-//     </li>`
-//     let reviewForm = document.getElementById('review-form')
-//     reviewForm.innerHTML=""
-//   })
-// }
+function reviewsHTML(review) {
+  return(`
+    <h4><li>${review.stars} - ${review.title} by ${review.user.username}</h4>
+    <h5>${review.beer.name} - ${review.content}</h5>
+    </li>
+    `)
+}
 
-// class Review {
-//   constructor (object){
-//     this.id = object.id
-//     this.stars = object.stars
-//     this.title = object.title
-//     this.content = object.content
-//     this.beer = object.beer
-//   }
-// }
-//
-// Review.prototype.reviewHTML = function() {
-//
-//   return(`
-//   <div id="review-info">
-//     <h2>${this.stars} - ${this.title}</h2>
-//     <a href="/beers/${this.beer.id}" id="see-beer">
-//     <h4>${this.beer.name}</h4></a>
-//     <p>${this.content}</p>
-//   </div>
-//   `)
-// }
-//
-// function getReviews(){
-//   fetch('http://localhost:3000/reviews')
-//   .then(function(response) {
-//     return response.json();
-//   })
-//   .then(function(data) {
-//     $("#our-new-beers").empty()
-//     data.forEach(review => {
-//       let newreview = new Review(review)
-//       let reviewHTML = newReview.reviewHTML()
-//       $("#our-new-beers").append(reviewHTML)
-//     })
-//   })
-//     $("#our-new-beers").append("done")
-// }
+function getReviews(){
+  fetch('http://localhost:3000/reviews')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    clearPage()
+    $("#our-new-beers").append("<h1>All Reviews</h1>")
+    data.forEach(review => {
+      let reviewHTML = reviewsHTML(review)
+      $("#our-new-beers").append(reviewHTML)
+    })
+  })
+}
+
+function displayBeerReviews(id) {
+  document.getElementById('reviews').innerHTML=""
+  $.get("/beers/" + id + "/reviews.json", function(data) {
+    data.forEach(review => {
+      let reviewHTML = reviewsHTML(review)
+      $("#reviews").append(reviewHTML)
+    })
+
+  })
+}
+
+function createReviewForm(id){
+  let html = `
+  <form onsubmit="createReview(); return false;">
+    <div>
+      <label for="beer_id" type="hidden" id="beer_id" name="beer_id" value="id"></label>
+    </div>
+    <div>
+      <label for="stars">Stars</label>
+      <input min="1" max="5" type="number" name="stars" id="stars">
+    </div>
+    <div>
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title">
+    </div>
+    <div>
+      <label for="content">Content</label>
+      <textarea name="content" id="content"></textarea>
+    </div>
+
+    <input type="submit" id="submit" value="Create Review">
+    </form>
+  `
+  $("#review-form").append(html)
+  document.getElementById('beer_id').value = id
+}
+
+function createReview() {
+  const review = {
+    beer_id: document.getElementById('beer_id').value,
+    stars: document.getElementById('stars').value,
+    title: document.getElementById('title').value,
+    content: document.getElementById('content').value
+  }
+  fetch('http://localhost:3000/reviews', {
+    method: 'POST',
+    body: JSON.stringify( {review} ),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  }).then(resp => resp.json())
+  .then(review => {
+    document.querySelector('#reviews').innerHTML += `<h4><li>${review.stars} - ${review.title}</h4>
+    <h5>${review.content}</h5>
+    </li>`
+    let reviewForm = document.getElementById('review-form')
+    reviewForm.innerHTML=""
+  })
+}
+
+//Event Listeners
+
+function addClickReview() {
+  let link = document.querySelectorAll('#see-beer-reviews')
+  for (let i = 0; i < link.length ; i++)
+    {
+      let id = link[i].dataset.id
+      link[i].addEventListener("click", function(event) {
+        event.preventDefault()
+        displayBeerReviews(id)
+      })
+    }
+  }
+
+function addClickNewReview() {
+  let newReview = document.querySelectorAll('#new-review')
+  for (let i = 0; i < newReview.length ; i++)
+    {
+      let id = newReview[i].dataset.id
+      newReview[i].addEventListener("click", function(event) {
+        event.preventDefault()
+        createReviewForm(id)
+      })
+    }
+}
