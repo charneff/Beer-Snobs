@@ -38,7 +38,7 @@ class Beer {
 function reviewsHTML(review) {
   return(`
     <h4><li>${review.stars} - ${review.title}</h4>
-    <h5>${review.content}</h5>
+    <h5>${review.beer.name} - ${review.content}</h5>
     </li>
     `)
 }
@@ -111,6 +111,22 @@ function getBreweries(){
       $("#our-new-beers").append(breweryHTML)
     })
     addClickBrewery()
+  })
+}
+
+function getReviews(){
+  fetch('http://localhost:3000/reviews')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    clearPage()
+    $("#our-new-beers").append("<h1>All Reviews</h1>")
+    data.forEach(review => {
+      debugger;
+      let reviewHTML = reviewsHTML(review)
+      $("#our-new-beers").append(reviewHTML)
+    })
   })
 }
 

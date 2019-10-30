@@ -24,10 +24,11 @@ class ReviewsController < ApplicationController
 
   def index
     if @beer = Beer.find_by_id(params[:beer_id])
-      @reviews = @beer.reviews
-      render json: @reviews
+      reviews = @beer.reviews
+      render json: reviews
     else
-      @reviews = Review.all
+      reviews = Review.all
+      render json: reviews
     end
   end
 
