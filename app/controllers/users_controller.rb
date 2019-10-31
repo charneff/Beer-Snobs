@@ -16,8 +16,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    redirect_to '/home'
-    redirect_to '/' if !@user
+    if !@user
+      redirect_to '/'
+    else
+      redirect_to '/home'
+    end
   end
 
   private

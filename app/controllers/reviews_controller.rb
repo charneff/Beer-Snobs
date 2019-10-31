@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :redirect_if_not_logged_in
 
   def new
     if @beer = Beer.find_by_id(params[:beer_id])
