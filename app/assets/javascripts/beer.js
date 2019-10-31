@@ -9,7 +9,6 @@ class Beer {
     this.reviews = obj.reviews
   }
 
-
   beersHTML() {
     return(`
     <div>
@@ -35,14 +34,6 @@ class Beer {
     }
 }
 
-function clearPage() {
-  document.getElementById('greeting').innerHTML=""
-  document.getElementById('our-new-beers').innerHTML=""
-  document.getElementById('reviews').innerHTML=""
-  document.getElementById('review-form').innerHTML=""
-  document.getElementById('links').innerHTML=""
-}
-
 function getBeersAlpha(){
   fetch('http://localhost:3000/beers')
   .then(function(response) {
@@ -50,7 +41,7 @@ function getBeersAlpha(){
   })
   .then(function(data) {
     clearPage()
-    $("#our-new-beers").append("<h1>All Beers</h1>")
+    document.getElementById('our-new-beers').innerHTML += "<h1>All Beers</h1>"
     alpha = data.sort(function(a, b) {
       var nameA = a.name.toUpperCase();
       var nameB = b.name.toUpperCase();
@@ -65,7 +56,7 @@ function getBeersAlpha(){
     alpha.forEach(beer => {
       let newBeer = new Beer(beer)
       let beerHTML = newBeer.beersHTML()
-      $("#our-new-beers").append(beerHTML)
+      document.getElementById('our-new-beers').innerHTML += beerHTML
     })
     addClickBeer()
   })
@@ -76,7 +67,7 @@ function showBeer(id) {
   $.get("/beers/" + id, function(data) {
   let beer = new Beer(data)
   let beerHTML = beer.showBeerHTML()
-  $("#our-new-beers").append(beerHTML)
+  document.getElementById('our-new-beers').innerHTML += beerHTML
   addClickReview()
   addClickNewReview()
   })

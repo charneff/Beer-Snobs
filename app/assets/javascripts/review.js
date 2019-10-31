@@ -1,3 +1,14 @@
+class Review {
+  constructor(obj){
+    this.id = obj.id
+    this.stars = obj.stars
+    this.title = obj.title
+    this.content = obj.content
+    this.user_id = obj.user_id
+    this.beer_id = obj.beer_id
+  }
+}
+
 function reviewsHTML(review) {
   return(`
     <h4><li>${review.stars} - ${review.title} by ${review.user.username}</h4>
@@ -13,10 +24,10 @@ function getReviews(){
   })
   .then(function(data) {
     clearPage()
-    $("#our-new-beers").append("<h1>All Reviews</h1>")
+    document.getElementById('our-new-beers').innerHTML += "<h1>All Reviews</h1>"
     data.forEach(review => {
       let reviewHTML = reviewsHTML(review)
-      $("#our-new-beers").append(reviewHTML)
+      document.getElementById('our-new-beers').innerHTML += reviewHTML
     })
   })
 }
@@ -26,7 +37,7 @@ function displayBeerReviews(id) {
   $.get("/beers/" + id + "/reviews.json", function(data) {
     data.forEach(review => {
       let reviewHTML = reviewsHTML(review)
-      $("#reviews").append(reviewHTML)
+      document.getElementById('reviews').innerHTML += reviewHTML
     })
 
   })
@@ -54,7 +65,7 @@ function createReviewForm(id){
     <input type="submit" id="submit" value="Create Review">
     </form>
   `
-  $("#review-form").append(html)
+  document.getElementById('review-form').innerHTML += html
   document.getElementById('beer_id').value = id
 }
 
