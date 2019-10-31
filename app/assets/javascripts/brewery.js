@@ -40,12 +40,16 @@ function getBreweries(){
 
 function showBrewery(id) {
   clearPage()
-  $.get("/breweries/" + id, function(data) {
+  fetch(`http://localhost:3000/breweries/${id}`)
+  .then(function(response) {
+    return response.json()
+  })
+  .then(function(data) {
     title = formatBrewery(data.name)
     document.getElementById('our-new-beers').innerHTML += title
     data.beers.forEach(beer => {
       let breweryBeers = breweryBeersHTML(beer)
-      $("#our-new-beers").append(breweryBeers)
+      document.getElementById('our-new-beers').innerHTML += breweryBeers
     })
     addClickBeer()
   })

@@ -34,12 +34,15 @@ function getReviews(){
 
 function displayBeerReviews(id) {
   document.getElementById('reviews').innerHTML=""
-  $.get("/beers/" + id + "/reviews.json", function(data) {
+  fetch(`http://localhost:3000/beers/${id}/reviews`)
+  .then(function(response) {
+    return response.json()
+  })
+  .then(function(data) {
     data.forEach(review => {
       let reviewHTML = reviewsHTML(review)
       document.getElementById('reviews').innerHTML += reviewHTML
     })
-
   })
 }
 

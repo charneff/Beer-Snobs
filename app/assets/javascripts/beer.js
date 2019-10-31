@@ -64,12 +64,16 @@ function getBeersAlpha(){
 
 function showBeer(id) {
   clearPage()
-  $.get("/beers/" + id, function(data) {
-  let beer = new Beer(data)
-  let beerHTML = beer.showBeerHTML()
-  document.getElementById('our-new-beers').innerHTML += beerHTML
-  addClickReview()
-  addClickNewReview()
+  fetch(`http://localhost:3000/beers/${id}`)
+  .then(function(response) {
+    return response.json()
+  })
+  .then(function(data) {
+    let beer = new Beer(data)
+    let beerHTML = beer.showBeerHTML()
+    document.getElementById('our-new-beers').innerHTML += beerHTML
+    addClickReview()
+    addClickNewReview()
   })
 }
 
