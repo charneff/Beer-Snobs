@@ -29,13 +29,17 @@ function getBreweries(){
   })
   .then(function(data) {
     clearPage()
-    document.getElementById('our-new-beers').innerHTML += "<h1>All Breweries</h1>"
-    data.forEach(brewery => {
-      let breweryHTML = breweriesHTML(brewery)
-      document.getElementById('our-new-beers').innerHTML += breweryHTML
-    })
-    addClickBrewery()
+    appendBreweries(data)
+})
+}
+
+function appendBreweries(data){
+  document.getElementById('our-new-beers').innerHTML += "<h1>All Breweries</h1>"
+  data.forEach(brewery => {
+    let breweryHTML = breweriesHTML(brewery)
+    document.getElementById('our-new-beers').innerHTML += breweryHTML
   })
+  addClickBrewery()
 }
 
 function showBrewery(id) {

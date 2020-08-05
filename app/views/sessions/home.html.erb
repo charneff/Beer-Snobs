@@ -6,10 +6,24 @@
 
 <div id="links">
   <%= link_to "Add a New Beer", new_beer_path %><br>
+  <a href="#" id="beer-form">New Beer JS</a><br>
   <a href="#" onclick="getBeersAlpha(); return false;">See All Beers(alphabetically)</a><br>
   <a href="#" onclick="getBreweries(); return false;">See All Breweries</a><br>
   <a href="#" onclick="getReviews(); return false;">See All Reviews</a><br>
 </div>
+
+<script>
+  function addClickNewBeer() {
+    let link = document.getElementById('beer-form')
+      link.addEventListener("click", function(event) {
+          event.preventDefault()
+          createBeerForm()
+        })
+      }
+  addClickNewBeer()
+
+
+</script>
 
 <div id="our-new-beers"></div>
 

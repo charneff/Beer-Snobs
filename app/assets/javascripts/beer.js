@@ -33,6 +33,90 @@ class Beer {
       `)
     }
 }
+var breweries = []
+var breweryValues = fetch('http://localhost:3000/breweries')
+.then(function(response) {
+  return response.json();
+})
+.then(function(data) {
+  console.log("inside fetch")
+  console.log(data)
+  data.forEach(brewery => breweries.push({
+    name: brewery.name,
+    id: brewery.id,
+    location: brewery.location
+  }))
+console.log(breweries)
+})
+
+function createBeerForm(){
+  clearPage()
+  let html = `
+  <h1>Create New Beer</h1>
+  <form onsubmit="createBeer(); return false;">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div>
+      <label for="style">Style</label>
+      <input type="text" name="style" id="style">
+    </div>
+    <div>
+      <label for="abv">Abv</label>
+      <input type="number" name="abv" id="abv">
+    </div>
+    <div>
+      <label for="flavor_profile">Flavor Profile:</label>
+      <textarea name="flavor_profile" id="flavor_profile"></textarea>
+    </div><br>
+    <div>
+    <label for="brewery">Select a Brewery</label>
+    <select id="brewery" name="brewery">Populate Breweries</select>
+    </div><br>
+    <div>Or Create a New One:</div>
+    <div>
+    <label for="brewery_name">Name</label>
+    <input type="text" name=brewery_name id=brewery_name>
+    </div>
+    <div>
+    <label for="brewery_name">Location</label>
+    <input type="text" name=brewery_location id=brewery_location>
+    </div>
+
+    <input type="submit" id="submit" value="Create Beer">
+    </form>
+  `
+
+  document.getElementById('beer-form').innerHTML += html
+  let blank = document.createElement("option")
+  blank.text = "Select One"
+  document.getElementById('brewery').appendChild(blank)
+  breweries.forEach(brewery => {
+    let d= document.createElement("option")
+    d.text = `${brewery.name} - ${brewery.location}`
+    d.dataset.id = brewery.id
+    document.getElementById('brewery').appendChild(d)
+ })
+
+
+  //document.getElementById('beer_id').value = id
+}
+
+function createBeer(){
+
+  console.log("inside create beer")
+  let x = document.getElementById('brewery')
+  let i = x.selectedIndex
+  debugger
+    const beer = {
+      name: document.getElementById('name').value,
+      style: document.getElementById('style').value,
+      abv: document.getElementById('abv').value,
+      flavor_profile: document.getElementById('flavor_profile').value,
+      brewery_id: x.options[i].dataset.id
+    }
+}
 
 function getBeersAlpha(){
   fetch('http://localhost:3000/beers')
@@ -76,6 +160,7 @@ function showBeer(id) {
     addClickNewReview()
   })
 }
+
 
 // Event Listeners
 
